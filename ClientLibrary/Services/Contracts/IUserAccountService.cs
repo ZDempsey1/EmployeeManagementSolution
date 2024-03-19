@@ -1,9 +1,9 @@
 ﻿using BaseLibrary.DTOs;
 using BaseLibrary.Responses;
 
-namespace ServerLibrary.Repositories.Contracts
+namespace ClientLibrary.Services.Contracts
 {
-    public interface IUserAccount
+    public interface IUserAccountService
     {
         Task<GeneralResponse> CreateAsync(Register user);
 
@@ -11,5 +11,6 @@ namespace ServerLibrary.Repositories.Contracts
 
         Task<LoginResponse> RefreshTokenAsync(RefreshToken token);
 
+        Task<WeatherForecast[]> GetWeaterForecast();
     }
 }

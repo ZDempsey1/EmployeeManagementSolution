@@ -10,7 +10,6 @@ namespace Server.Controllers
     public class AuthenticationController(IUserAccount accountInterface) : ControllerBase
     {
         [HttpPost("register")]
-
         public async Task<IActionResult> CreateAsync(Register user)
         {
             if (user == null) return BadRequest("Required information missing.");
@@ -23,6 +22,14 @@ namespace Server.Controllers
         {
             if (user == null) return BadRequest("User not found.");
             var result = await accountInterface.SignInAsync(user);
+            return Ok(result);
+        }
+
+        [HttpPost("refresh-token")]
+        public async Task<IActionResult> RefreshTokenAsync(RefreshToken token)
+        {
+            if (token == null) return BadRequest("Model is empty.");
+            var result = await accountInterface.RefreshTokenAsync(token);
             return Ok(result);
         }
     }
