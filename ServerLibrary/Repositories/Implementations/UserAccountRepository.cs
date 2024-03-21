@@ -89,8 +89,6 @@ namespace ServerLibrary.Repositories.Implementations
             return new LoginResponse(true, "Login finished.", jwtToken, refreshToken);
         }
 
-        private static string GenerateRefreshToken() => Convert.ToBase64String(RandomNumberGenerator.GetBytes(64));
-
         private string GenerateToken(ApplicationUser user, string role)
         {
             var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(config.Value.Key!));
@@ -118,7 +116,7 @@ namespace ServerLibrary.Repositories.Implementations
         private async Task<SystemRole> FindRoleName(int roleId) => 
             await appDbContext.SystemRoles.FirstOrDefaultAsync(_ => _.Id == roleId);
 
-        private static string GenerateRefreshToke() => Convert.ToBase64String(RandomNumberGenerator.GetBytes(64));
+        private static string GenerateRefreshToken() => Convert.ToBase64String(RandomNumberGenerator.GetBytes(64));
 
         private async Task<ApplicationUser> FindUserByEmail(string email) =>
             await appDbContext.ApplicationUsers.FirstOrDefaultAsync(_ => _.Email!.ToLower()!.Equals(email!.ToLower()));
